@@ -1,26 +1,22 @@
-int trigPin;
-int echoPin;
-int duration;
+const int trigPin = 12;
+const int echoPin = 13;
+long duration;
 int distance;
 
 void setup() {
-  trigPin = 10;
-  echoPin = 11;
   pinMode(trigPin, OUTPUT);
   pinMode(echoPin, INPUT);
+  Serial.begin(9600);
 }
 
 void loop() {
-  digitalRead(trigPin, LOW);
+  digitalWrite(trigPin, LOW);
   delayMicroseconds(3);
-  digitalRead(trigPin, HIGH);
+  digitalWrite(trigPin, HIGH);
   delayMicroseconds(10);
-  digitalRead(trigPin, LOW);
-  delayMicroseconds(3);
-  duration = pulseIn(echoPin);
-  distance = (duration * 0.034) / 2;
-  if (distance <= 10){
-    // Incorporate colour detection features
-  }
+  digitalWrite(trigPin, LOW);
+  duration = pulseIn(echoPin, HIGH);
+  distance = duration * 0.034 / 2;
+  Serial.println(distance);
 }
 
